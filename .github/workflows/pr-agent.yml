@@ -10,7 +10,7 @@ jobs:
       issues: write
       pull-requests: write
       contents: write
-    name: Run pr agent on every pull request, respond to user comments
+    name: Agent PR review
     steps:
       - name: PR Agent action step
         id: pragent
@@ -18,3 +18,5 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config.model: "gpt-5.4-nano"
+          pr_commands: "['/review']"
