@@ -1,5 +1,6 @@
 'use client'
 
+import { ExpensesActionDialog } from './expenses-action-dialog'
 import { useExpenses } from './expenses-provider'
 
 export function ExpensesDialogs() {
@@ -7,11 +8,25 @@ export function ExpensesDialogs() {
 
   return (
     <>
-      {/* Add dialog — will be implemented in T-4 */}
+      <ExpensesActionDialog
+        key='expense-add'
+        open={open === 'add'}
+        onOpenChange={() => setOpen('add')}
+      />
 
       {currentRow && (
         <>
-          {/* Edit dialog — will be implemented in T-4 */}
+          <ExpensesActionDialog
+            key={`expense-edit-${currentRow.id}`}
+            open={open === 'edit'}
+            onOpenChange={() => {
+              setOpen('edit')
+              setTimeout(() => {
+                setCurrentRow(null)
+              }, 500)
+            }}
+            currentRow={currentRow}
+          />
 
           {/* Delete dialog — will be implemented in T-5 */}
         </>

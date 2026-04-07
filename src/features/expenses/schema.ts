@@ -25,4 +25,4 @@ export const expenseFormSchema = z.object({
   date: z.coerce.date(),
   categoryId: z.string().min(1, 'Category is required'),
 })
-export type ExpenseForm = z.infer<typeof expenseFormSchema>
+export type ExpenseForm = z.output<typeof expenseFormSchema>
