@@ -11,7 +11,7 @@ Phase 1a of MVP. First feature built on empty codebase. Includes project scaffol
 - [x] T-3: Expense list page (data table with columns, filters, pagination)
 - [x] T-4: Create/Edit expense dialog (form + server actions)
 - [x] T-5: Delete expense (soft delete + confirmation dialog)
-- [ ] T-6: Seed data (categories + realistic expenses)
+- [x] T-6: Seed data (categories + realistic expenses)
 
 ## What Will Be Built
 
