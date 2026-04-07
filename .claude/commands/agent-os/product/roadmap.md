@@ -12,12 +12,17 @@
 - [x] T-6: Seed data
 
 ## Phase 1b — Dashboard & Charts
-**Status:** Future
+**Status:** Pending
 
-- Visual charts and spending breakdowns (by category, time period)
-- Filters and date range selection
-- Export functionality (CSV/PDF)
-- Dashboard with summary views and key metrics
+### Tasks
+- [ ] T-1: Save spec documentation
+- [ ] T-2: Add shadcn primitives + dashboard data layer
+- [ ] T-3: Dashboard page + summary cards
+- [ ] T-4: Category breakdown chart (pie/donut)
+- [ ] T-5: Monthly spending trend (bar chart)
+- [ ] T-6: Recent expenses list
+- [ ] T-7: Date range filter
+- [ ] T-8: Export (CSV + PDF)
 
 ## Phase 2: Post-Launch
 
