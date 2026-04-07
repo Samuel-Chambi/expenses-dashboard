@@ -1,15 +1,15 @@
 # Product Roadmap
 
 ## Phase 1a — Expense CRUD
-**Status:** Pending
+**Status:** Complete
 
 ### Tasks
-- [ ] T-1: Scaffold project (Next.js + Prisma + shadcn/ui + layout)
-- [ ] T-2: Prisma schema + migration (Category + Expense)
-- [ ] T-3: Expense list page (data table)
-- [ ] T-4: Create/Edit expense dialog
-- [ ] T-5: Delete expense (soft delete)
-- [ ] T-6: Seed data
+- [x] T-1: Scaffold project (Next.js + Prisma + shadcn/ui + layout)
+- [x] T-2: Prisma schema + migration (Category + Expense)
+- [x] T-3: Expense list page (data table)
+- [x] T-4: Create/Edit expense dialog
+- [x] T-5: Delete expense (soft delete)
+- [x] T-6: Seed data
 
 ## Phase 1b — Dashboard & Charts
 **Status:** Future
