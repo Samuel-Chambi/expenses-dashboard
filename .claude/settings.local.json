@@ -2,7 +2,32 @@
   "permissions": {
     "allow": [
       "Bash(xargs cat:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Read(//d/projects/**)",
+      "Bash(cp -r expenses-temp/.gitignore expenses-temp/eslint.config.mjs expenses-temp/next.config.ts expenses-temp/next-env.d.ts expenses-temp/package.json expenses-temp/package-lock.json expenses-temp/postcss.config.mjs expenses-temp/tsconfig.json expenses-dashboard/)",
+      "Bash(cp -r expenses-temp/src expenses-dashboard/)",
+      "Bash(cp -r expenses-temp/public expenses-dashboard/)",
+      "Bash(cp -r expenses-temp/node_modules expenses-dashboard/)",
+      "Bash(npx shadcn@latest init -d)",
+      "Bash(npx shadcn@latest add input label badge separator dialog alert-dialog form select command popover dropdown-menu table checkbox sidebar sonner calendar -y)",
+      "Bash(npm install:*)",
+      "Bash(xargs grep:*)",
+      "Bash(npx shadcn@latest add form collapsible -y)",
+      "Bash(npm ls:*)",
+      "Bash(npx shadcn@latest add form -y)",
+      "Bash(npx shadcn@latest add form --overwrite)",
+      "Bash(npx shadcn@latest add https://ui.shadcn.com/r/form -y)",
+      "Bash(npx next:*)",
+      "Bash(rm -rf src/components/ui src/hooks/use-mobile.ts)",
+      "Bash(npx shadcn@latest init -d --style new-york --base-color neutral)",
+      "Bash(npx shadcn@latest init -d --force)",
+      "Bash(rm -rf src/components/ui)",
+      "Bash(npx shadcn@latest add button input label badge separator dialog alert-dialog select command popover dropdown-menu table checkbox sidebar sonner calendar form collapsible sheet tooltip skeleton textarea -y --overwrite)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/radix-ui/package.json'\\); console.log\\(pkg.version\\)\")",
+      "Bash(npx prisma:*)",
+      "Bash(node -e \"const dm = require\\('radix-ui'\\); console.log\\(typeof dm.DropdownMenu.Trigger\\)\")",
+      "Bash(gh pr:*)"
     ]
   }
 }
