@@ -1,6 +1,7 @@
 'use client'
 
 import { ExpensesActionDialog } from './expenses-action-dialog'
+import { ExpensesDeleteDialog } from './expenses-delete-dialog'
 import { useExpenses } from './expenses-provider'
 
 export function ExpensesDialogs() {
@@ -28,7 +29,17 @@ export function ExpensesDialogs() {
             currentRow={currentRow}
           />
 
-          {/* Delete dialog — will be implemented in T-5 */}
+          <ExpensesDeleteDialog
+            key={`expense-delete-${currentRow.id}`}
+            open={open === 'delete'}
+            onOpenChange={() => {
+              setOpen('delete')
+              setTimeout(() => {
+                setCurrentRow(null)
+              }, 500)
+            }}
+            currentRow={currentRow}
+          />
         </>
       )}
     </>

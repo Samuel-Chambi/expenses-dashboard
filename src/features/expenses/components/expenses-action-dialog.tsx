@@ -75,7 +75,7 @@ export function ExpensesActionDialog({
         ? await updateExpense(currentRow.id, values)
         : await createExpense(values)
 
-      if (result.error) {
+      if (!result.success) {
         toast.error(result.error)
         return
       }
