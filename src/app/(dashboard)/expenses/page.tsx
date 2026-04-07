@@ -1,17 +1,37 @@
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
+import { db } from '@/lib/db'
+import { ExpensesPage } from '@/features/expenses'
 
-export default function ExpensesPage() {
-  return (
-    <>
-      <Header fixed>
-        <h1 className='text-lg font-semibold'>Expenses</h1>
-      </Header>
-      <Main className='p-4'>
-        <p className='text-muted-foreground'>
-          Expenses feature coming in the next ticket.
-        </p>
-      </Main>
-    </>
-  )
+export default async function Page() {
+  const [expenses, categories] = await Promise.all([
+    db.expense.findMany({
+      where: { deletedAt: null },
+      include: { category: true },
+      orderBy: { date: 'desc' },
+    }),
+    db.category.findMany({
+      where: { deletedAt: null },
+      orderBy: { name: 'asc' },
+    }),
+  ])
+
+  const serialized = expenses.map((e) => ({
+    ...e,
+    amount: Number(e.amount),
+    date: e.date,
+    createdAt: e.createdAt,
+    updatedAt: e.updatedAt,
+    category: {
+      id: e.category.id,
+      name: e.category.name,
+      color: e.category.color,
+    },
+  }))
+
+  const cats = categories.map((c) => ({
+    id: c.id,
+    name: c.name,
+    color: c.color,
+  }))
+
+  return <ExpensesPage expenses={serialized} categories={cats} />
 }

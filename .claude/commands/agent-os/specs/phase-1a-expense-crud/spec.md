@@ -8,7 +8,7 @@ Phase 1a of MVP. First feature built on empty codebase. Includes project scaffol
 
 - [x] T-1: Scaffold project (Next.js + Prisma + shadcn/ui + folder structure + layout)
 - [x] T-2: Prisma schema + migration (Category + Expense models)
-- [ ] T-3: Expense list page (data table with columns, filters, pagination)
+- [x] T-3: Expense list page (data table with columns, filters, pagination)
 - [ ] T-4: Create/Edit expense dialog (form + server actions)
 - [ ] T-5: Delete expense (soft delete + confirmation dialog)
 - [ ] T-6: Seed data (categories + realistic expenses)
