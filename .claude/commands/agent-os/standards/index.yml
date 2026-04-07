@@ -1,0 +1,15 @@
+api:
+  server-actions:
+    description: Server Actions for mutations, API routes only for webhooks/external
+
+database:
+  prisma:
+    description: Prisma client setup, model conventions, soft deletes
+
+frontend:
+  ui-components:
+    description: shadcn/ui, Tailwind, Recharts, react-hook-form, Zod rules
+
+global:
+  project-structure:
+    description: Feature-based Next.js App Router directory layout
