@@ -26,7 +26,8 @@
       "Bash(npx shadcn@latest add button input label badge separator dialog alert-dialog select command popover dropdown-menu table checkbox sidebar sonner calendar form collapsible sheet tooltip skeleton textarea -y --overwrite)",
       "Bash(node -e \"const pkg = require\\('./node_modules/radix-ui/package.json'\\); console.log\\(pkg.version\\)\")",
       "Bash(npx prisma:*)",
-      "Bash(node -e \"const dm = require\\('radix-ui'\\); console.log\\(typeof dm.DropdownMenu.Trigger\\)\")"
+      "Bash(node -e \"const dm = require\\('radix-ui'\\); console.log\\(typeof dm.DropdownMenu.Trigger\\)\")",
+      "Bash(gh pr:*)"
     ]
   }
 }

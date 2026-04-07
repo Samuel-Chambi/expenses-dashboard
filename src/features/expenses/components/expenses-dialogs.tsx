@@ -12,7 +12,9 @@ export function ExpensesDialogs() {
       <ExpensesActionDialog
         key='expense-add'
         open={open === 'add'}
-        onOpenChange={() => setOpen('add')}
+        onOpenChange={(nextOpen) => {
+          setOpen(nextOpen ? 'add' : null)
+        }}
       />
 
       {currentRow && (
@@ -20,11 +22,9 @@ export function ExpensesDialogs() {
           <ExpensesActionDialog
             key={`expense-edit-${currentRow.id}`}
             open={open === 'edit'}
-            onOpenChange={() => {
-              setOpen('edit')
-              setTimeout(() => {
-                setCurrentRow(null)
-              }, 500)
+            onOpenChange={(nextOpen) => {
+              setOpen(nextOpen ? 'edit' : null)
+              if (!nextOpen) setCurrentRow(null)
             }}
             currentRow={currentRow}
           />
@@ -32,11 +32,9 @@ export function ExpensesDialogs() {
           <ExpensesDeleteDialog
             key={`expense-delete-${currentRow.id}`}
             open={open === 'delete'}
-            onOpenChange={() => {
-              setOpen('delete')
-              setTimeout(() => {
-                setCurrentRow(null)
-              }, 500)
+            onOpenChange={(nextOpen) => {
+              setOpen(nextOpen ? 'delete' : null)
+              if (!nextOpen) setCurrentRow(null)
             }}
             currentRow={currentRow}
           />

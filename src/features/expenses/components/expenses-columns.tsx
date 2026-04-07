@@ -13,7 +13,11 @@ export const expensesColumns: ColumnDef<Expense>[] = [
       <DataTableColumnHeader column={column} title='Date' />
     ),
     cell: ({ row }) => {
-      const date = new Date(row.getValue('date'))
+      const raw = row.getValue('date')
+      const date = raw instanceof Date ? raw : new Date(String(raw))
+
+      if (Number.isNaN(date.getTime())) return <div className='text-nowrap'>—</div>
+
       return (
         <div className='text-nowrap'>
           {date.toLocaleDateString('en-US', {
@@ -43,7 +47,13 @@ export const expensesColumns: ColumnDef<Expense>[] = [
       <DataTableColumnHeader column={column} title='Amount' />
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('amount'))
+      const raw = row.getValue('amount')
+      const amount = typeof raw === 'number' ? raw : Number(raw)
+
+      if (!Number.isFinite(amount)) {
+        return <div className='text-right font-medium'>—</div>
+      }
+
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
