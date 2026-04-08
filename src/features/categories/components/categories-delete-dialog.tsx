@@ -21,6 +21,7 @@ export function CategoriesDeleteDialog({
   const hasExpenses = currentRow._count.expenses > 0
 
   const handleDelete = async () => {
+    if (hasExpenses) return
     setIsLoading(true)
     try {
       const result = await deleteCategory(currentRow.id)

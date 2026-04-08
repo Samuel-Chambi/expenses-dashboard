@@ -45,7 +45,7 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
           value={value ?? ''}
           onChange={(e) => {
             const v = e.target.value
-            if (v === '') {
+            if (v === '' || v === '#') {
               onChange(null)
               return
             }

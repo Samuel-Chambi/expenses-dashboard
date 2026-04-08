@@ -53,10 +53,17 @@ export async function deleteCategory(id: string): Promise<ActionResult> {
     return { success: false, error: `Cannot delete: ${count} active expense(s) use this category` }
   }
 
-  await db.category.update({
-    where: { id },
-    data: { deletedAt: new Date() },
-  })
+  try {
+    await db.category.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    })
+  } catch (e: unknown) {
+    if (e && typeof e === 'object' && 'code' in e && e.code === 'P2025') {
+      return { success: false, error: 'Category not found' }
+    }
+    throw e
+  }
 
   revalidatePath('/categories')
   revalidatePath('/expenses')
