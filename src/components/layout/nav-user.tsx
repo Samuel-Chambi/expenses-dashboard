@@ -2,6 +2,7 @@
 
 import { ChevronsUpDown, LogOut, Settings } from 'lucide-react'
 import Link from 'next/link'
+import { signOutAction } from '@/features/auth/actions'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -75,7 +76,10 @@ export function NavUser({ user }: NavUserProps) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className='text-destructive'>
+            <DropdownMenuItem
+              className='text-destructive'
+              onClick={() => signOutAction()}
+            >
               <LogOut className='size-4' />
               Sign out
             </DropdownMenuItem>

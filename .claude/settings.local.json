@@ -28,7 +28,8 @@
       "Bash(npx prisma:*)",
       "Bash(node -e \"const dm = require\\('radix-ui'\\); console.log\\(typeof dm.DropdownMenu.Trigger\\)\")",
       "Bash(gh pr:*)",
-      "Bash(npx shadcn@latest add card chart -y)"
+      "Bash(npx shadcn@latest add card chart -y)",
+      "Bash(PGPASSWORD=root psql -h localhost -U postgres -d expenses -c \"DROP SCHEMA public CASCADE; CREATE SCHEMA public;\")"
     ]
   }
 }

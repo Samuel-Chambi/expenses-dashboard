@@ -1,4 +1,5 @@
 import { startOfMonth, endOfMonth, parseISO, startOfDay, endOfDay } from 'date-fns'
+import { getCurrentUserId } from '@/lib/auth-utils'
 import { DashboardPage } from '@/features/dashboard'
 import {
   getSummaryStats,
@@ -21,12 +22,14 @@ export default async function Page({ searchParams }: Props) {
     to: params.to ? endOfDay(parseISO(params.to)) : endOfMonth(now),
   }
 
+  const userId = await getCurrentUserId()
+
   const [stats, categoryBreakdown, monthlyTrend, recentExpenses] =
     await Promise.all([
-      getSummaryStats(dateRange),
-      getCategoryBreakdown(dateRange),
-      getMonthlyTrend(dateRange),
-      getRecentExpenses(dateRange),
+      getSummaryStats(dateRange, userId),
+      getCategoryBreakdown(dateRange, userId),
+      getMonthlyTrend(dateRange, userId),
+      getRecentExpenses(dateRange, userId),
     ])
 
   return (

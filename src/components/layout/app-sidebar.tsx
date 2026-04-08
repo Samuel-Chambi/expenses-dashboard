@@ -12,7 +12,15 @@ import { sidebarData } from './sidebar-data'
 import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
 
-export function AppSidebar() {
+type AppSidebarProps = {
+  user: {
+    name: string
+    email: string
+    avatar: string
+  }
+}
+
+export function AppSidebar({ user }: AppSidebarProps) {
   return (
     <Sidebar collapsible='icon' variant='floating'>
       <SidebarHeader>
@@ -32,7 +40,7 @@ export function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={sidebarData.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

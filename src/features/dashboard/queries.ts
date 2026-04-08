@@ -8,13 +8,14 @@ import type {
   RecentExpense,
 } from './schema'
 
-const baseWhere = (range: DateRange) => ({
+const baseWhere = (range: DateRange, userId: string) => ({
   deletedAt: null,
+  userId,
   date: { gte: range.from, lte: range.to },
 })
 
-export async function getSummaryStats(range: DateRange): Promise<SummaryStats> {
-  const where = baseWhere(range)
+export async function getSummaryStats(range: DateRange, userId: string): Promise<SummaryStats> {
+  const where = baseWhere(range, userId)
 
   const [aggregate, topCategoryGroup] = await Promise.all([
     db.expense.aggregate({
@@ -54,11 +55,12 @@ export async function getSummaryStats(range: DateRange): Promise<SummaryStats> {
 }
 
 export async function getCategoryBreakdown(
-  range: DateRange
+  range: DateRange,
+  userId: string
 ): Promise<CategoryBreakdownItem[]> {
   const groups = await db.expense.groupBy({
     by: ['categoryId'],
-    where: baseWhere(range),
+    where: baseWhere(range, userId),
     _sum: { amount: true },
     orderBy: { _sum: { amount: 'desc' } },
   })
@@ -82,10 +84,11 @@ export async function getCategoryBreakdown(
 }
 
 export async function getMonthlyTrend(
-  range: DateRange
+  range: DateRange,
+  userId: string
 ): Promise<MonthlyTrendItem[]> {
   const expenses = await db.expense.findMany({
-    where: baseWhere(range),
+    where: baseWhere(range, userId),
     select: { amount: true, date: true },
     orderBy: { date: 'asc' },
   })
@@ -111,10 +114,11 @@ export async function getMonthlyTrend(
 
 export async function getRecentExpenses(
   range: DateRange,
+  userId: string,
   limit = 10
 ): Promise<RecentExpense[]> {
   const expenses = await db.expense.findMany({
-    where: baseWhere(range),
+    where: baseWhere(range, userId),
     include: { category: true },
     orderBy: { date: 'desc' },
     take: limit,

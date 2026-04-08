@@ -1,5 +1,6 @@
 import { PrismaClient } from '../src/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
+import bcrypt from 'bcryptjs'
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
 const prisma = new PrismaClient({ adapter })
@@ -90,13 +91,26 @@ function pickRandom<T>(arr: T[]): T {
 }
 
 async function main() {
+  console.log('Seeding test user...')
+  const hashedPassword = await bcrypt.hash('password123', 10)
+  const user = await prisma.user.upsert({
+    where: { email: 'test@example.com' },
+    update: {},
+    create: {
+      name: 'Test User',
+      email: 'test@example.com',
+      password: hashedPassword,
+    },
+  })
+  console.log(`  User: ${user.email} (id: ${user.id})`)
+
   console.log('Seeding categories...')
   const createdCategories = []
   for (const cat of categories) {
     const created = await prisma.category.upsert({
-      where: { name: cat.name },
+      where: { name_userId: { name: cat.name, userId: user.id } },
       update: {},
-      create: cat,
+      create: { ...cat, userId: user.id },
     })
     createdCategories.push(created)
   }
@@ -108,13 +122,14 @@ async function main() {
     const template = expenseTemplates[cat.name]
     if (!template) continue
 
-    const count = Math.floor(Math.random() * 8) + 5 // 5-12 per category
+    const count = Math.floor(Math.random() * 8) + 5
     for (let i = 0; i < count; i++) {
       expenses.push({
         amount: randomBetween(template.minAmount, template.maxAmount),
         description: pickRandom(template.descriptions),
         date: randomDate(90),
         categoryId: cat.id,
+        userId: user.id,
       })
     }
   }

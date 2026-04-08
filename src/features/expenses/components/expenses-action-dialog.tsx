@@ -118,7 +118,7 @@ export function ExpensesActionDialog({
                       step='0.01'
                       placeholder='0.00'
                       {...field}
-                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      onChange={(e) => field.onChange(e.target.valueAsNumber || 0)}
                     />
                   </FormControl>
                   <FormMessage />

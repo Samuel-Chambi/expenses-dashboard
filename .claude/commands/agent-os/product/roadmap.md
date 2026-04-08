@@ -34,7 +34,15 @@
 - [x] T-4: Add/Edit category dialog + delete dialog
 
 ## Phase 2b — Authentication
-**Status:** Future
+**Status:** Complete
+
+### Tasks
+- [x] T-1: Save spec documentation
+- [x] T-2: Prisma schema migration + install packages
+- [x] T-3: NextAuth.js v5 setup + middleware
+- [x] T-4: Auth pages (sign-in, sign-up)
+- [x] T-5: Per-user data isolation
+- [x] T-6: Sidebar user data + sign-out + seed update
 
 ## Phase 2c — Recurring Expenses
 **Status:** Future
