@@ -10,6 +10,7 @@ import type {
   DateRange,
 } from './schema'
 import { CategoryChart } from './components/category-chart'
+import { MonthlyChart } from './components/monthly-chart'
 import { SummaryCards } from './components/summary-cards'
 
 type DashboardPageProps = {
@@ -38,7 +39,7 @@ export function DashboardPage({
 
         <div className='grid gap-4 lg:grid-cols-7'>
           <div className='lg:col-span-4 space-y-4'>
-            {/* Monthly chart — T-5 */}
+            <MonthlyChart data={monthlyTrend} />
             <CategoryChart data={categoryBreakdown} />
           </div>
           <div className='lg:col-span-3'>
