@@ -61,7 +61,7 @@ export function ExpensesActionDialog({
           categoryId: currentRow.categoryId,
         }
       : {
-          amount: 0,
+          amount: '' as unknown as number,
           description: '',
           date: new Date(),
           categoryId: '',
@@ -118,7 +118,11 @@ export function ExpensesActionDialog({
                       step='0.01'
                       placeholder='0.00'
                       {...field}
-                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      value={field.value ?? ''}
+                      onChange={(e) => {
+                        const v = e.target.valueAsNumber
+                        field.onChange(Number.isNaN(v) ? '' : v)
+                      }}
                     />
                   </FormControl>
                   <FormMessage />

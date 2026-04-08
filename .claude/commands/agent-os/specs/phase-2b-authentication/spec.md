@@ -10,8 +10,8 @@ Phase 2b. App has no user accounts — all data is global. This adds NextAuth.js
 - [x] T-2: Prisma schema migration + install packages
 - [x] T-3: NextAuth.js v5 setup + middleware
 - [x] T-4: Auth pages (sign-in, sign-up)
-- [ ] T-5: Per-user data isolation
-- [ ] T-6: Sidebar user data + sign-out + seed update
+- [x] T-5: Per-user data isolation (completed in T-2)
+- [x] T-6: Sidebar user data + sign-out + seed update
 
 ## What Will Be Built
 
