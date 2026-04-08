@@ -10,6 +10,7 @@ import type {
   DateRange,
 } from './schema'
 import { CategoryChart } from './components/category-chart'
+import { DateRangeFilter } from './components/date-range-filter'
 import { MonthlyChart } from './components/monthly-chart'
 import { RecentExpenses } from './components/recent-expenses'
 import { SummaryCards } from './components/summary-cards'
@@ -33,6 +34,9 @@ export function DashboardPage({
     <>
       <Header fixed>
         <h1 className='text-lg font-semibold'>Dashboard</h1>
+        <div className='ms-auto'>
+          <DateRangeFilter dateRange={dateRange} />
+        </div>
       </Header>
 
       <Main className='flex flex-1 flex-col gap-4 p-4 sm:gap-6 sm:p-6'>

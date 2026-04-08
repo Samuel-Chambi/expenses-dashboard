@@ -99,10 +99,14 @@ export async function getMonthlyTrend(
 
   return Array.from(monthMap.entries())
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([key, total]) => ({
-      month: format(new Date(key + '-01'), 'MMM'),
-      total: Math.round(total * 100) / 100,
-    }))
+    .map(([key, total]) => {
+      const [year, month] = key.split('-')
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      return {
+        month: monthNames[parseInt(month, 10) - 1],
+        total: Math.round(total * 100) / 100,
+      }
+    })
 }
 
 export async function getRecentExpenses(
