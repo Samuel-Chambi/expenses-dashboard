@@ -11,6 +11,7 @@ import type {
 } from './schema'
 import { CategoryChart } from './components/category-chart'
 import { MonthlyChart } from './components/monthly-chart'
+import { RecentExpenses } from './components/recent-expenses'
 import { SummaryCards } from './components/summary-cards'
 
 type DashboardPageProps = {
@@ -43,7 +44,7 @@ export function DashboardPage({
             <CategoryChart data={categoryBreakdown} />
           </div>
           <div className='lg:col-span-3'>
-            {/* Recent expenses — T-6 */}
+            <RecentExpenses data={recentExpenses} />
           </div>
         </div>
       </Main>
