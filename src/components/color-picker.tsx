@@ -12,7 +12,7 @@ const PRESET_COLORS = [
 
 type ColorPickerProps = {
   value?: string | null
-  onChange: (color: string) => void
+  onChange: (color: string | null) => void
 }
 
 export function ColorPicker({ value, onChange }: ColorPickerProps) {
@@ -45,7 +45,11 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
           value={value ?? ''}
           onChange={(e) => {
             const v = e.target.value
-            if (/^#[0-9a-fA-F]{0,6}$/.test(v) || v === '') {
+            if (v === '') {
+              onChange(null)
+              return
+            }
+            if (/^#[0-9a-fA-F]{0,6}$/.test(v)) {
               onChange(v)
             }
           }}

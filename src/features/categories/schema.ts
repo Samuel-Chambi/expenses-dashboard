@@ -12,6 +12,13 @@ export type Category = z.infer<typeof categorySchema>
 
 export const categoryFormSchema = z.object({
   name: z.string().min(1, 'Name is required').max(50, 'Name is too long'),
-  color: z.string().nullable(),
+  color: z
+    .string()
+    .trim()
+    .nullable()
+    .transform((v) => (v === '' ? null : v))
+    .refine((v) => v === null || /^#[0-9a-fA-F]{6}$/.test(v), {
+      message: 'Invalid color (expected #RRGGBB)',
+    }),
 })
 export type CategoryForm = z.output<typeof categoryFormSchema>
