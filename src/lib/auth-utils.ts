@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
+import { auth } from './auth'
 
-// Placeholder until NextAuth is configured in T-3
-// Returns a dummy userId so the app compiles
 export async function getCurrentUserId(): Promise<string> {
-  // Will be replaced with real auth() call in T-3
-  return 'placeholder-user-id'
+  const session = await auth()
+  if (!session?.user?.id) redirect('/sign-in')
+  return session.user.id
 }
