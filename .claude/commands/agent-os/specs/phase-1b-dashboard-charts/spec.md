@@ -9,7 +9,7 @@ Phase 1b of MVP. Builds on Phase 1a (Expense CRUD). Adds dashboard with visual c
 - [x] T-1: Save spec documentation
 - [x] T-2: Add shadcn primitives + dashboard data layer (queries + schema)
 - [x] T-3: Dashboard page + summary cards
-- [ ] T-4: Category breakdown chart (pie/donut)
+- [x] T-4: Category breakdown chart (pie/donut)
 - [ ] T-5: Monthly spending trend (bar chart)
 - [ ] T-6: Recent expenses list
 - [ ] T-7: Date range filter (picker + presets + URL params)
