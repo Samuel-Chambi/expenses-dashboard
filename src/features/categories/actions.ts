@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { db } from '@/lib/db'
+import { getCurrentUserId } from '@/lib/auth-utils'
 import { categoryFormSchema } from './schema'
 
 type ActionResult = { success: true } | { success: false; error: string }
@@ -12,8 +13,10 @@ export async function createCategory(data: unknown): Promise<ActionResult> {
     return { success: false, error: parsed.error.issues[0]?.message ?? 'Invalid data' }
   }
 
+  const userId = await getCurrentUserId()
+
   try {
-    await db.category.create({ data: parsed.data })
+    await db.category.create({ data: { ...parsed.data, userId } })
   } catch (e: unknown) {
     if (e && typeof e === 'object' && 'code' in e && e.code === 'P2002') {
       return { success: false, error: 'A category with this name already exists' }
@@ -31,8 +34,10 @@ export async function updateCategory(id: string, data: unknown): Promise<ActionR
     return { success: false, error: parsed.error.issues[0]?.message ?? 'Invalid data' }
   }
 
+  const userId = await getCurrentUserId()
+
   try {
-    await db.category.update({ where: { id }, data: parsed.data })
+    await db.category.update({ where: { id, userId }, data: parsed.data })
   } catch (e: unknown) {
     if (e && typeof e === 'object' && 'code' in e && e.code === 'P2002') {
       return { success: false, error: 'A category with this name already exists' }
@@ -45,8 +50,10 @@ export async function updateCategory(id: string, data: unknown): Promise<ActionR
 }
 
 export async function deleteCategory(id: string): Promise<ActionResult> {
+  const userId = await getCurrentUserId()
+
   const count = await db.expense.count({
-    where: { categoryId: id, deletedAt: null },
+    where: { categoryId: id, userId, deletedAt: null },
   })
 
   if (count > 0) {
@@ -55,7 +62,7 @@ export async function deleteCategory(id: string): Promise<ActionResult> {
 
   try {
     await db.category.update({
-      where: { id },
+      where: { id, userId },
       data: { deletedAt: new Date() },
     })
   } catch (e: unknown) {

@@ -1,15 +1,18 @@
 import { db } from '@/lib/db'
+import { getCurrentUserId } from '@/lib/auth-utils'
 import { ExpensesPage } from '@/features/expenses'
 
 export default async function Page() {
+  const userId = await getCurrentUserId()
+
   const [expenses, categories] = await Promise.all([
     db.expense.findMany({
-      where: { deletedAt: null },
+      where: { deletedAt: null, userId },
       include: { category: true },
       orderBy: { date: 'desc' },
     }),
     db.category.findMany({
-      where: { deletedAt: null },
+      where: { deletedAt: null, userId },
       orderBy: { name: 'asc' },
     }),
   ])
