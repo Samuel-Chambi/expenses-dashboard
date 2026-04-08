@@ -13,7 +13,7 @@ Phase 1b of MVP. Builds on Phase 1a (Expense CRUD). Adds dashboard with visual c
 - [x] T-5: Monthly spending trend (bar chart)
 - [x] T-6: Recent expenses list
 - [x] T-7: Date range filter (picker + presets + URL params)
-- [ ] T-8: Export (CSV + PDF)
+- [x] T-8: Export (CSV + PDF)
 
 ## What Will Be Built
 

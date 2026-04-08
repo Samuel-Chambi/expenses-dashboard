@@ -128,3 +128,21 @@
     @apply font-sans;
   }
 }
+
+@media print {
+  [data-slot="sidebar"],
+  [data-sidebar="rail"],
+  [data-slot="sidebar-trigger"],
+  header button,
+  header [data-slot="popover-trigger"] {
+    display: none !important;
+  }
+  header {
+    position: static !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

@@ -12,17 +12,17 @@
 - [x] T-6: Seed data
 
 ## Phase 1b — Dashboard & Charts
-**Status:** Pending
+**Status:** Complete
 
 ### Tasks
-- [ ] T-1: Save spec documentation
-- [ ] T-2: Add shadcn primitives + dashboard data layer
-- [ ] T-3: Dashboard page + summary cards
-- [ ] T-4: Category breakdown chart (pie/donut)
-- [ ] T-5: Monthly spending trend (bar chart)
-- [ ] T-6: Recent expenses list
-- [ ] T-7: Date range filter
-- [ ] T-8: Export (CSV + PDF)
+- [x] T-1: Save spec documentation
+- [x] T-2: Add shadcn primitives + dashboard data layer
+- [x] T-3: Dashboard page + summary cards
+- [x] T-4: Category breakdown chart (pie/donut)
+- [x] T-5: Monthly spending trend (bar chart)
+- [x] T-6: Recent expenses list
+- [x] T-7: Date range filter
+- [x] T-8: Export (CSV + PDF)
 
 ## Phase 2: Post-Launch
 
