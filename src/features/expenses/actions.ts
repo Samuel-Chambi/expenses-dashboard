@@ -14,6 +14,15 @@ export async function createExpense(data: unknown): Promise<ActionResult> {
   }
 
   const userId = await getCurrentUserId()
+
+  const categoryOwned = await db.category.findFirst({
+    where: { id: parsed.data.categoryId, userId },
+    select: { id: true },
+  })
+  if (!categoryOwned) {
+    return { success: false, error: 'Invalid category' }
+  }
+
   await db.expense.create({ data: { ...parsed.data, userId } })
   revalidatePath('/expenses')
   return { success: true }
@@ -26,6 +35,15 @@ export async function updateExpense(id: string, data: unknown): Promise<ActionRe
   }
 
   const userId = await getCurrentUserId()
+
+  const categoryOwned = await db.category.findFirst({
+    where: { id: parsed.data.categoryId, userId },
+    select: { id: true },
+  })
+  if (!categoryOwned) {
+    return { success: false, error: 'Invalid category' }
+  }
+
   await db.expense.update({ where: { id, userId }, data: parsed.data })
   revalidatePath('/expenses')
   return { success: true }

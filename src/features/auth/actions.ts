@@ -31,13 +31,9 @@ export async function signUpAction(data: unknown): Promise<ActionResult> {
     },
   })
 
-  try {
-    await signIn('credentials', { email, password, redirect: false })
-  } catch (e) {
-    if (e instanceof AuthError) {
-      return { success: false, error: 'Account created but sign-in failed. Please sign in manually.' }
-    }
-    throw e
+  const signInResult = await signIn('credentials', { email, password, redirect: false }).catch(() => null)
+  if (!signInResult || signInResult?.error) {
+    return { success: false, error: 'Account created but sign-in failed. Please sign in manually.' }
   }
 
   return { success: true }
@@ -48,11 +44,14 @@ export async function signInWithCredentials(data: {
   password: string
 }): Promise<ActionResult> {
   try {
-    await signIn('credentials', {
+    const result = await signIn('credentials', {
       email: data.email,
       password: data.password,
       redirect: false,
     })
+    if (result?.error) {
+      return { success: false, error: 'Invalid email or password' }
+    }
     return { success: true }
   } catch (e) {
     if (e instanceof AuthError) {
