@@ -24,6 +24,26 @@
 - [x] T-7: Date range filter
 - [x] T-8: Export (CSV + PDF)
 
-## Phase 2: Post-Launch
+## Phase 2a — Category Management
+**Status:** Complete
 
-To be determined.
+### Tasks
+- [x] T-1: Save spec documentation
+- [x] T-2: Color picker + category schema + server actions
+- [x] T-3: Category list page (data table)
+- [x] T-4: Add/Edit category dialog + delete dialog
+
+## Phase 2b — Authentication
+**Status:** Future
+
+## Phase 2c — Recurring Expenses
+**Status:** Future
+
+## Phase 2d — Budget Tracking
+**Status:** Future
+
+## Phase 2e — Google Form Integration
+**Status:** Future
+
+## Phase 2f — Polish & Deploy
+**Status:** Future

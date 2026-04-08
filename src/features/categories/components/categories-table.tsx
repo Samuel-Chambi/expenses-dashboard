@@ -8,8 +8,6 @@ import {
   type VisibilityState,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -25,19 +23,17 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
-import { type Expense, type Category } from '../schema'
-import { expensesColumns as columns } from './expenses-columns'
+import { type Category } from '../schema'
+import { categoriesColumns as columns } from './categories-columns'
 
-type ExpensesTableProps = {
-  data: Expense[]
-  categories: Category[]
+type CategoriesTableProps = {
+  data: Category[]
 }
 
-export function ExpensesTable({ data, categories }: ExpensesTableProps) {
-  const [rowSelection, setRowSelection] = useState({})
+export function CategoriesTable({ data }: CategoriesTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([
-    { id: 'date', desc: true },
+    { id: 'name', desc: false },
   ])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [pagination, setPagination] = useState<PaginationState>({
@@ -51,47 +47,31 @@ export function ExpensesTable({ data, categories }: ExpensesTableProps) {
     state: {
       sorting,
       pagination,
-      rowSelection,
       columnFilters,
       columnVisibility,
     },
     onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     getPaginationRowModel: getPaginationRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
   })
-
-  const categoryFilterOptions = categories.map((cat) => ({
-    label: cat.name,
-    value: cat.id,
-  }))
 
   return (
     <div className='flex flex-1 flex-col gap-4'>
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Search expenses...'
-        searchKey='description'
-        filters={[
-          {
-            columnId: 'category',
-            title: 'Category',
-            options: categoryFilterOptions,
-          },
-        ]}
+        searchPlaceholder='Search categories...'
+        searchKey='name'
       />
       <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className='group/row'>
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
@@ -112,11 +92,7 @@ export function ExpensesTable({ data, categories }: ExpensesTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                  className='group/row'
-                >
+                <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
@@ -136,7 +112,7 @@ export function ExpensesTable({ data, categories }: ExpensesTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No expenses found.
+                  No categories found.
                 </TableCell>
               </TableRow>
             )}

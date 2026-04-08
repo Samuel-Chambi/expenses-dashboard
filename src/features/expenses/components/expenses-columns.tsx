@@ -51,16 +51,15 @@ export const expensesColumns: ColumnDef<Expense>[] = [
       const amount = typeof raw === 'number' ? raw : Number(raw)
 
       if (!Number.isFinite(amount)) {
-        return <div className='text-right font-medium'>—</div>
+        return <div className='font-medium'>—</div>
       }
 
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
       }).format(amount)
-      return <div className='text-right font-medium'>{formatted}</div>
+      return <div className='font-medium'>{formatted}</div>
     },
-    meta: { className: 'text-right' },
   },
   {
     accessorKey: 'category',
