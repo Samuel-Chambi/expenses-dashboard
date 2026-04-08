@@ -15,6 +15,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
 import {
   Table,
   TableBody,
@@ -92,7 +93,11 @@ export function ExpensesTable({ data, categories }: ExpensesTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className='group/row'>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} colSpan={header.colSpan}>
+                  <TableHead
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    className={cn(header.column.columnDef.meta?.className)}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -113,7 +118,10 @@ export function ExpensesTable({ data, categories }: ExpensesTableProps) {
                   className='group/row'
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={cn(cell.column.columnDef.meta?.className)}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

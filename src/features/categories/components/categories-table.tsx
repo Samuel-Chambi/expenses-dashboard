@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
 import {
   Table,
   TableBody,
@@ -72,7 +73,11 @@ export function CategoriesTable({ data }: CategoriesTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} colSpan={header.colSpan}>
+                  <TableHead
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    className={cn(header.column.columnDef.meta?.className)}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -89,7 +94,10 @@ export function CategoriesTable({ data }: CategoriesTableProps) {
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={cn(cell.column.columnDef.meta?.className)}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

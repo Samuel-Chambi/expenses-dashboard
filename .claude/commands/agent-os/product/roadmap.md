@@ -25,13 +25,13 @@
 - [x] T-8: Export (CSV + PDF)
 
 ## Phase 2a — Category Management
-**Status:** Pending
+**Status:** Complete
 
 ### Tasks
-- [ ] T-1: Save spec documentation
-- [ ] T-2: Color picker + category schema + server actions
-- [ ] T-3: Category list page (data table)
-- [ ] T-4: Add/Edit category dialog + delete dialog
+- [x] T-1: Save spec documentation
+- [x] T-2: Color picker + category schema + server actions
+- [x] T-3: Category list page (data table)
+- [x] T-4: Add/Edit category dialog + delete dialog
 
 ## Phase 2b — Authentication
 **Status:** Future

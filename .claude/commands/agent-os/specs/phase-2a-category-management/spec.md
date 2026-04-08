@@ -9,7 +9,7 @@ Phase 2a. Categories currently only exist as seeded data. This adds a `/categori
 - [x] T-1: Save spec documentation
 - [x] T-2: Color picker + category schema + server actions
 - [x] T-3: Category list page (data table)
-- [ ] T-4: Add/Edit category dialog + delete dialog
+- [x] T-4: Add/Edit category dialog + delete dialog
 
 ## What Will Be Built
 

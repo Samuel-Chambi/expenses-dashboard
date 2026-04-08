@@ -38,9 +38,8 @@ export const categoriesColumns: ColumnDef<Category>[] = [
       <DataTableColumnHeader column={column} title='Expenses' />
     ),
     cell: ({ row }) => (
-      <div className='text-right'>{row.getValue('expenses')}</div>
+      <div>{row.getValue('expenses')}</div>
     ),
-    meta: { className: 'text-right' },
   },
   {
     accessorKey: 'createdAt',
