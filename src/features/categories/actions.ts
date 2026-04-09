@@ -58,12 +58,20 @@ export async function updateCategory(id: string, data: unknown): Promise<ActionR
 export async function deleteCategory(id: string): Promise<ActionResult> {
   const userId = await getCurrentUserId()
 
-  const count = await db.expense.count({
-    where: { categoryId: id, userId, deletedAt: null },
-  })
+  const [expenseCount, recurringCount] = await Promise.all([
+    db.expense.count({
+      where: { categoryId: id, userId, deletedAt: null },
+    }),
+    db.recurringExpense.count({
+      where: { categoryId: id, userId, deletedAt: null },
+    }),
+  ])
 
-  if (count > 0) {
-    return { success: false, error: `Cannot delete: ${count} active expense(s) use this category` }
+  if (expenseCount > 0 || recurringCount > 0) {
+    const parts = []
+    if (expenseCount > 0) parts.push(`${expenseCount} expense(s)`)
+    if (recurringCount > 0) parts.push(`${recurringCount} recurring expense(s)`)
+    return { success: false, error: `Cannot delete: ${parts.join(' and ')} use this category` }
   }
 
   const result = await db.category.updateMany({

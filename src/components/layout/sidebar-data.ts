@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Receipt,
+  Repeat,
   Tags,
   Settings,
 } from 'lucide-react'
@@ -30,6 +31,11 @@ export const sidebarData: SidebarData = {
           title: 'Categories',
           url: '/categories',
           icon: Tags,
+        },
+        {
+          title: 'Recurring',
+          url: '/recurring',
+          icon: Repeat,
         },
       ],
     },

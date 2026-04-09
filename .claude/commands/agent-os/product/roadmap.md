@@ -45,14 +45,14 @@
 - [x] T-6: Sidebar user data + sign-out + seed update
 
 ## Phase 2c — Recurring Expenses
-**Status:** Pending
+**Status:** Complete
 
 ### Tasks
-- [ ] T-1: Save spec documentation
-- [ ] T-2: Prisma schema migration
-- [ ] T-3: Feature module schema + server actions
-- [ ] T-4: Auto-create logic + dashboard integration
-- [ ] T-5: Recurring expenses UI + sidebar link
+- [x] T-1: Save spec documentation
+- [x] T-2: Prisma schema migration
+- [x] T-3: Feature module schema + server actions
+- [x] T-4: Auto-create logic + dashboard integration
+- [x] T-5: Recurring expenses UI + sidebar link
 
 ## Phase 2d — Budget Tracking
 **Status:** Future
