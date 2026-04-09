@@ -9,7 +9,7 @@ Phase 2d. Users have no spending limits. This adds global + per-category monthly
 - [x] T-1: Save spec documentation
 - [x] T-2: Prisma schema migration (Budget model)
 - [x] T-3: Schema + actions + queries
-- [ ] T-4: Budget page UI (progress bars, dialogs)
+- [x] T-4: Budget page UI (progress bars, dialogs)
 - [ ] T-5: Dashboard integration + sidebar link
 
 ## What Will Be Built
