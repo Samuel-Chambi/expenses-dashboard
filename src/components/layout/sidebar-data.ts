@@ -1,0 +1,47 @@
+import {
+  LayoutDashboard,
+  Receipt,
+  Tags,
+  Settings,
+} from 'lucide-react'
+import { type SidebarData } from './types'
+
+export const sidebarData: SidebarData = {
+  user: {
+    name: 'User',
+    email: 'user@example.com',
+    avatar: '',
+  },
+  navGroups: [
+    {
+      title: 'General',
+      items: [
+        {
+          title: 'Dashboard',
+          url: '/',
+          icon: LayoutDashboard,
+        },
+        {
+          title: 'Expenses',
+          url: '/expenses',
+          icon: Receipt,
+        },
+        {
+          title: 'Categories',
+          url: '/categories',
+          icon: Tags,
+        },
+      ],
+    },
+    {
+      title: 'Other',
+      items: [
+        {
+          title: 'Settings',
+          url: '/settings',
+          icon: Settings,
+        },
+      ],
+    },
+  ],
+}
