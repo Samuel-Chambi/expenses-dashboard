@@ -21,6 +21,12 @@ export type MonthlyTrendItem = {
   total: number
 }
 
+export type BudgetOverview = {
+  amount: number
+  spent: number
+  percentage: number
+} | null
+
 export type RecentExpense = {
   id: string
   amount: number

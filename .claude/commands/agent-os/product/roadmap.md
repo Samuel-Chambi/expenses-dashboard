@@ -55,14 +55,14 @@
 - [x] T-5: Recurring expenses UI + sidebar link
 
 ## Phase 2d — Budget Tracking
-**Status:** Pending
+**Status:** Complete
 
 ### Tasks
-- [ ] T-1: Save spec documentation
-- [ ] T-2: Prisma schema migration
-- [ ] T-3: Schema + actions + queries
-- [ ] T-4: Budget page UI
-- [ ] T-5: Dashboard integration + sidebar link
+- [x] T-1: Save spec documentation
+- [x] T-2: Prisma schema migration
+- [x] T-3: Schema + actions + queries
+- [x] T-4: Budget page UI
+- [x] T-5: Dashboard integration + sidebar link
 
 ## Phase 2e — Google Form Integration
 **Status:** Future

@@ -3,6 +3,7 @@ import {
   Receipt,
   Repeat,
   Tags,
+  Wallet,
   Settings,
 } from 'lucide-react'
 import { type SidebarData } from './types'
@@ -36,6 +37,11 @@ export const sidebarData: SidebarData = {
           title: 'Recurring',
           url: '/recurring',
           icon: Repeat,
+        },
+        {
+          title: 'Budgets',
+          url: '/budgets',
+          icon: Wallet,
         },
       ],
     },
