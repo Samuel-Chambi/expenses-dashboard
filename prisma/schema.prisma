@@ -16,9 +16,10 @@ model User {
   password      String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  expenses      Expense[]
-  categories    Category[]
+  accounts           Account[]
+  expenses           Expense[]
+  categories         Category[]
+  recurringExpenses  RecurringExpense[]
 }
 
 model Account {
@@ -47,8 +48,9 @@ model Category {
   user      User      @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  expenses  Expense[]
+  deletedAt          DateTime?
+  expenses           Expense[]
+  recurringExpenses  RecurringExpense[]
 
   @@unique([name, userId])
   @@index([userId])
@@ -71,4 +73,25 @@ model Expense {
   @@index([date])
   @@index([deletedAt])
   @@index([userId])
+}
+
+model RecurringExpense {
+  id          String    @id @default(cuid())
+  amount      Decimal   @db.Decimal(10, 2)
+  description String
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id])
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  frequency   String    // 'monthly' | 'yearly'
+  startDate   DateTime
+  nextDueDate DateTime
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([userId])
+  @@index([nextDueDate])
+  @@index([deletedAt])
 }
