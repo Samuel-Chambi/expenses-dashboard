@@ -26,7 +26,11 @@ export default async function Page({ searchParams }: Props) {
   const userId = await getCurrentUserId()
 
   // Auto-create expenses from due recurring templates
-  await processRecurringExpenses(userId)
+  try {
+    await processRecurringExpenses(userId)
+  } catch (err) {
+    console.error('processRecurringExpenses failed:', err)
+  }
 
   const [stats, categoryBreakdown, monthlyTrend, recentExpenses] =
     await Promise.all([

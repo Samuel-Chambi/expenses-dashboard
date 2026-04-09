@@ -24,7 +24,10 @@ export async function processRecurringExpenses(userId: string) {
       date: Date
     }[] = []
 
-    while (nextDue <= now) {
+    const MAX_BACKFILL = 120
+    let iterations = 0
+
+    while (nextDue <= now && iterations < MAX_BACKFILL) {
       expensesToCreate.push({
         amount: rec.amount,
         description: rec.description,
@@ -33,23 +36,25 @@ export async function processRecurringExpenses(userId: string) {
         date: new Date(nextDue),
       })
       nextDue = advanceFn(nextDue, 1)
+      iterations++
     }
 
     if (expensesToCreate.length > 0) {
-      // Use updateMany with nextDueDate condition as optimistic lock
-      // If another request already advanced nextDueDate, count will be 0 and we skip
-      const updated = await db.recurringExpense.updateMany({
-        where: {
-          id: rec.id,
-          nextDueDate: rec.nextDueDate, // optimistic lock
-        },
-        data: { nextDueDate: nextDue },
-      })
+      await db.$transaction(async (tx) => {
+        // Optimistic lock: only advance if nextDueDate hasn't changed
+        const updated = await tx.recurringExpense.updateMany({
+          where: {
+            id: rec.id,
+            nextDueDate: rec.nextDueDate,
+          },
+          data: { nextDueDate: nextDue },
+        })
 
-      // Only create expenses if we successfully claimed this recurring
-      if (updated.count > 0) {
-        await db.expense.createMany({ data: expensesToCreate })
-      }
+        // Only create expenses if we successfully claimed this recurring
+        if (updated.count > 0) {
+          await tx.expense.createMany({ data: expensesToCreate })
+        }
+      })
     }
   }
 }
