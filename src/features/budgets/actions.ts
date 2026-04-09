@@ -27,17 +27,14 @@ export async function upsertBudget(data: unknown): Promise<ActionResult> {
     }
   }
 
-  // Handle null categoryId (global) separately since Prisma compound unique with null needs findFirst
+  // Handle null categoryId (global) via updateMany to cover potential duplicates
   if (categoryId === null) {
-    const existing = await db.budget.findFirst({
+    const updated = await db.budget.updateMany({
       where: { userId, categoryId: null },
+      data: { amount },
     })
-    if (existing) {
-      await db.budget.update({
-        where: { id: existing.id },
-        data: { amount },
-      })
-    } else {
+
+    if (updated.count === 0) {
       await db.budget.create({
         data: { amount, categoryId: null, userId },
       })

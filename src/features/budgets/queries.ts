@@ -69,7 +69,7 @@ export async function getGlobalBudgetProgress(
   const monthEnd = endOfMonth(now)
 
   const [globalBudget, totalAggregate] = await Promise.all([
-    db.budget.findFirst({ where: { userId, categoryId: null } }),
+    db.budget.findFirst({ where: { userId, categoryId: null }, orderBy: { updatedAt: 'desc' } }),
     db.expense.aggregate({
       where: {
         userId,

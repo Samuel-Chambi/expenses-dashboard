@@ -16,9 +16,9 @@ export function BudgetProgress({ spent, limit, className }: BudgetProgressProps)
   const displayWidth = Math.min(percentage, 100)
 
   const barColor =
-    percentage > 90
+    percentage >= 90
       ? 'bg-red-500'
-      : percentage > 75
+      : percentage >= 75
         ? 'bg-yellow-500'
         : 'bg-green-500'
 
@@ -30,7 +30,7 @@ export function BudgetProgress({ spent, limit, className }: BudgetProgressProps)
         </span>
         <span className={cn(
           'font-medium',
-          percentage > 90 ? 'text-red-500' : percentage > 75 ? 'text-yellow-500' : 'text-muted-foreground'
+          percentage >= 90 ? 'text-red-500' : percentage >= 75 ? 'text-yellow-500' : 'text-muted-foreground'
         )}>
           {percentage}%
         </span>
