@@ -37,7 +37,13 @@ export async function updateCategory(id: string, data: unknown): Promise<ActionR
   const userId = await getCurrentUserId()
 
   try {
-    await db.category.update({ where: { id, userId }, data: parsed.data })
+    const result = await db.category.updateMany({
+      where: { id, userId },
+      data: parsed.data,
+    })
+    if (result.count === 0) {
+      return { success: false, error: 'Category not found' }
+    }
   } catch (e: unknown) {
     if (e && typeof e === 'object' && 'code' in e && e.code === 'P2002') {
       return { success: false, error: 'A category with this name already exists' }
@@ -60,16 +66,12 @@ export async function deleteCategory(id: string): Promise<ActionResult> {
     return { success: false, error: `Cannot delete: ${count} active expense(s) use this category` }
   }
 
-  try {
-    await db.category.update({
-      where: { id, userId },
-      data: { deletedAt: new Date() },
-    })
-  } catch (e: unknown) {
-    if (e && typeof e === 'object' && 'code' in e && e.code === 'P2025') {
-      return { success: false, error: 'Category not found' }
-    }
-    throw e
+  const result = await db.category.updateMany({
+    where: { id, userId },
+    data: { deletedAt: new Date() },
+  })
+  if (result.count === 0) {
+    return { success: false, error: 'Category not found' }
   }
 
   revalidatePath('/categories')

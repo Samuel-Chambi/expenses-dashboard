@@ -44,17 +44,23 @@ export async function updateExpense(id: string, data: unknown): Promise<ActionRe
     return { success: false, error: 'Invalid category' }
   }
 
-  await db.expense.update({ where: { id, userId }, data: parsed.data })
+  const result = await db.expense.updateMany({ where: { id, userId }, data: parsed.data })
+  if (result.count === 0) {
+    return { success: false, error: 'Expense not found' }
+  }
   revalidatePath('/expenses')
   return { success: true }
 }
 
 export async function deleteExpense(id: string): Promise<ActionResult> {
   const userId = await getCurrentUserId()
-  await db.expense.update({
+  const result = await db.expense.updateMany({
     where: { id, userId },
     data: { deletedAt: new Date() },
   })
+  if (result.count === 0) {
+    return { success: false, error: 'Expense not found' }
+  }
   revalidatePath('/expenses')
   return { success: true }
 }
