@@ -1,5 +1,6 @@
 import { startOfMonth, endOfMonth, parseISO, startOfDay, endOfDay } from 'date-fns'
 import { getCurrentUserId } from '@/lib/auth-utils'
+import { processRecurringExpenses } from '@/features/recurring/process'
 import { DashboardPage } from '@/features/dashboard'
 import {
   getSummaryStats,
@@ -23,6 +24,13 @@ export default async function Page({ searchParams }: Props) {
   }
 
   const userId = await getCurrentUserId()
+
+  // Auto-create expenses from due recurring templates
+  try {
+    await processRecurringExpenses(userId)
+  } catch (err) {
+    console.error('processRecurringExpenses failed:', err)
+  }
 
   const [stats, categoryBreakdown, monthlyTrend, recentExpenses] =
     await Promise.all([
