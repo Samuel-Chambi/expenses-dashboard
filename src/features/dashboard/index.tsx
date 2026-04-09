@@ -8,7 +8,9 @@ import type {
   MonthlyTrendItem,
   RecentExpense,
   DateRange,
+  BudgetOverview as BudgetOverviewType,
 } from './schema'
+import { BudgetOverview } from './components/budget-overview'
 import { CategoryChart } from './components/category-chart'
 import { DateRangeFilter } from './components/date-range-filter'
 import { ExportButtons } from './components/export-buttons'
@@ -22,6 +24,7 @@ type DashboardPageProps = {
   monthlyTrend: MonthlyTrendItem[]
   recentExpenses: RecentExpense[]
   dateRange: DateRange
+  budgetOverview: BudgetOverviewType
 }
 
 export function DashboardPage({
@@ -30,6 +33,7 @@ export function DashboardPage({
   monthlyTrend,
   recentExpenses,
   dateRange,
+  budgetOverview,
 }: DashboardPageProps) {
   return (
     <>
@@ -43,6 +47,8 @@ export function DashboardPage({
 
       <Main className='flex flex-1 flex-col gap-4 p-4 sm:gap-6 sm:p-6'>
         <SummaryCards stats={stats} />
+
+        <BudgetOverview data={budgetOverview} />
 
         <div className='grid gap-4 lg:grid-cols-7'>
           <div className='lg:col-span-4 space-y-4'>

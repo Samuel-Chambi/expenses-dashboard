@@ -8,6 +8,7 @@ import {
   getMonthlyTrend,
   getRecentExpenses,
 } from '@/features/dashboard/queries'
+import { getGlobalBudgetProgress } from '@/features/budgets/queries'
 import type { DateRange } from '@/features/dashboard/schema'
 
 type Props = {
@@ -32,12 +33,13 @@ export default async function Page({ searchParams }: Props) {
     console.error('processRecurringExpenses failed:', err)
   }
 
-  const [stats, categoryBreakdown, monthlyTrend, recentExpenses] =
+  const [stats, categoryBreakdown, monthlyTrend, recentExpenses, budgetOverview] =
     await Promise.all([
       getSummaryStats(dateRange, userId),
       getCategoryBreakdown(dateRange, userId),
       getMonthlyTrend(dateRange, userId),
       getRecentExpenses(dateRange, userId),
+      getGlobalBudgetProgress(userId),
     ])
 
   return (
@@ -47,6 +49,7 @@ export default async function Page({ searchParams }: Props) {
       monthlyTrend={monthlyTrend}
       recentExpenses={recentExpenses}
       dateRange={dateRange}
+      budgetOverview={budgetOverview}
     />
   )
 }
